@@ -1,26 +1,22 @@
-function computeInterest()
-{
-     var principal = document.getElementById("principal").value;
+function compute(){
 
-     //Check if principal  is 0 or negative
-    if(principal < 1){
-        alert("Please enter a positive value");
-        document.getElementById("principal").focus();
-        return false;
+    var principal = document.getElementById("principal").value;
+    if (principal<=0){
+      document.getElementById("result").innerHTML = "Please enter a valid amount.";
+      return;
     }
-     var rate = document.getElementById("rate").value;
-     var years = document.getElementById("years").value;
-     //Calculate Interest
-     var interest = principal * years * rate /100;
-     var year = new Date().getFullYear()+parseInt(years) ;
-     var amount = principal + interest
-     //show the result
-     document.getElementById("result").innerHTML="If you deposit "+principal+",\<br\>at an interest rate of "+rate+"%\<br\>You will receive an amount of "+amount+",\<br\>in the year "+year+"\<br\>"
-
+    var rate = document.getElementById("rate").value;
+    var years = document.getElementById("years").value;
+    var interest = (parseInt(principal) * parseFloat(rate) * parseInt(years))/100;
+    var currentDate = new Date();
+    var year = currentDate.getFullYear();
+    var maturityYear = parseInt(years) + parseInt(year);
+    var maturityValue = parseInt(interest) + parseInt(principal);
+    var output = "If you deposit " + principal +"<br>at an interest rate of " + rate +"%.<br>You will receive an amount of " + maturityValue + "<br> at year " + maturityYear + ".<br>";
+    document.getElementById("result").innerHTML = output;
 }
-
-function updateRate() 
-{
-    var rateval = document.getElementById("rate").value;
-    document.getElementById("rate_val").innerText=rateval +"%";
+function displayRate(){
+    var rate = document.getElementById("rate").value;
+    rate += "%";
+    document.getElementById("displayRate").innerHTML = rate;
 }
